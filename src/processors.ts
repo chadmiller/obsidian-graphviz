@@ -26,7 +26,8 @@ export class Processors {
       const imageFormat = this.plugin.settings.imageFormat;
       const alreadyQualified = (cmdPath.contains("/") || cmdPath.contains('\\'));
       const execPrefix = alreadyQualified ? [] : [ `/usr/bin/env`, `-P`, LIKELY_LOCATIONS ];
-      const execFull = execPrefix.concat([ cmdPath, `-T${imageFormat}`, sourceFile ]);
+      const execFull = execPrefix.concat(
+        [ cmdPath, `-T${imageFormat}`, `-Gbgcolor=transparent`, `-Gstylesheet=obs-gviz.css`, sourceFile ]);
 
       console.debug(`Starting dot process [${execFull}]`);
       const dotProcess = spawn(execFull[0], execFull.slice(1));
